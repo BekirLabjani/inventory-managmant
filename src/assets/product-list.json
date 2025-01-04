@@ -1,0 +1,224 @@
+{
+    "categories": [
+      {
+        "id": 1,
+        "categoryName": "Getränke",
+        "image": "assets/img/ctg-prdct/drinks.jpg",
+        "subcategories": [
+          {
+            "id": 101,
+            "subcategoryName": "Soft Drinks",
+            "image": "assets/img/subctg-prdct/softdrinks.jpg",
+            "products": [
+              {
+                "id": 1001,
+                "name": "Coca-Cola",
+                "description": "Erfrischender Geschmack mit Kohlensäure",
+                "brand": "Coca-Cola",
+                "price": 1.2,
+                "discountPrice": 1.0,
+                "priceToTray": 7,
+                "tax": 0.07,
+                "package": "2 Liter",
+                "volume": "2000ml",
+                "image": "assets/img/drinks/cocacola-original-2l.webp",
+                "stockQuantity": 50,
+                "minimumStockLevel": 10,
+                "reorderQuantity": 50,
+                "expirationDate": "2024-12-31",
+                "isAvailable": true,
+                "sizes": ["1 Liter", "2 Liter"],
+                "flavors": ["Cola"],
+                "allergens": ["Keine"],
+                "promotions": "Kaufe 2, erhalte 1 gratis",
+                "newArrival": true,
+                "bestseller": true,
+                "ecoFriendly": true,
+                "recyclingInfo": "Flasche im Pfandautomaten recyceln"
+              }
+            ]
+          },
+          {
+            "id": 102,
+            "subcategoryName": "Wasser",
+            "image": "assets/img/drinks/water.jpg",
+            "products": [
+              {
+                "id": 1002,
+                "name": "Stillwasser",
+                "description": "Reines, klares Wasser ohne Kohlensäure",
+                "brand": "AquaPure",
+                "price": 0.8,
+                "discountPrice": 0.7,
+                "priceToTray": 4,
+                "tax": 0.07,
+                "package": "1 Liter",
+                "volume": "1000ml",
+                "image": "assets/img/drinks/water-bottle.jpg",
+                "stockQuantity": 100,
+                "minimumStockLevel": 15,
+                "reorderQuantity": 50,
+                "expirationDate": "2025-01-01",
+                "isAvailable": true,
+                "sizes": ["1 Liter"],
+                "flavors": ["Neutral"],
+                "allergens": ["Keine"],
+                "promotions": null,
+                "newArrival": false,
+                "bestseller": false,
+                "ecoFriendly": true,
+                "recyclingInfo": "Flasche im Pfandautomaten recyceln"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "categoryName": "Snacks",
+        "image": "assets/img/ctg-prdct/snacks.jpg",
+        "subcategories": [
+          {
+            "id": 201,
+            "subcategoryName": "Chips",
+            "image": "assets/img/subctg-prdct/chips.jpg",
+            "products": [
+              {
+                "id": 6001,
+                "name": "Paprika Chips",
+                "description": "Knusprige Kartoffelchips mit Paprikageschmack",
+                "brand": "Snacky",
+                "price": 1.5,
+                "discountPrice": 1.2,
+                "priceToTray": null,
+                "tax": 0.07,
+                "package": "150g",
+                "volume": "150g",
+                "image": "assets/img/snacks/paprika-chips.jpg",
+                "stockQuantity": 80,
+                "minimumStockLevel": 20,
+                "reorderQuantity": 40,
+                "expirationDate": "2024-10-15",
+                "isAvailable": true,
+                "sizes": ["150g"],
+                "flavors": ["Paprika"],
+                "allergens": ["Gluten"],
+                "promotions": "2 für 2,50€",
+                "newArrival": false,
+                "bestseller": true,
+                "ecoFriendly": false,
+                "recyclingInfo": "Verpackung im Restmüll entsorgen"
+              }
+            ]
+          },
+          {
+            "id": 202,
+            "subcategoryName": "Schokolade",
+            "image": "assets/img/subctg-prdct/chocolate.jpg",
+            "products": [
+              {
+                "id": 6002,
+                "name": "Milchschokolade",
+                "description": "Cremige Milchschokolade mit Haselnüssen",
+                "brand": "ChocoDelight",
+                "price": 2.0,
+                "discountPrice": 1.8,
+                "priceToTray": null,
+                "tax": 0.07,
+                "package": "100g Tafel",
+                "volume": "100g",
+                "image": "assets/img/snacks/milk-chocolate.jpg",
+                "stockQuantity": 60,
+                "minimumStockLevel": 10,
+                "reorderQuantity": 30,
+                "expirationDate": "2024-12-01",
+                "isAvailable": true,
+                "sizes": ["100g"],
+                "flavors": ["Haselnuss"],
+                "allergens": ["Nüsse", "Milch"],
+                "promotions": null,
+                "newArrival": true,
+                "bestseller": false,
+                "ecoFriendly": false,
+                "recyclingInfo": "Verpackung im Papiermüll entsorgen"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "categoryName": "Obst & Gemüse",
+        "image": "assets/img/ctg-prdct/produce.jpg",
+        "subcategories": [
+          {
+            "id": 301,
+            "subcategoryName": "Frisches Obst",
+            "image": "assets/img/subctg-prdct/fruits.jpg",
+            "products": [
+              {
+                "id": 3001,
+                "name": "Äpfel",
+                "description": "Frische, saftige Äpfel aus regionalem Anbau",
+                "brand": "BioFarm",
+                "price": 2.5,
+                "discountPrice": null,
+                "priceToTray": null,
+                "tax": 0.07,
+                "package": "1kg",
+                "volume": "1000g",
+                "image": "assets/img/produce/apples.jpg",
+                "stockQuantity": 50,
+                "minimumStockLevel": 10,
+                "reorderQuantity": 30,
+                "expirationDate": "2024-11-20",
+                "isAvailable": true,
+                "sizes": ["1kg"],
+                "flavors": ["Süß"],
+                "allergens": ["Keine"],
+                "promotions": null,
+                "newArrival": false,
+                "bestseller": false,
+                "ecoFriendly": true,
+                "recyclingInfo": "Verpackung im Biomüll entsorgen"
+              }
+            ]
+          },
+          {
+            "id": 302,
+            "subcategoryName": "Frisches Gemüse",
+            "image": "assets/img/subctg-prdct/vegetables.jpg",
+            "products": [
+              {
+                "id": 3002,
+                "name": "Karotten",
+                "description": "Knackige, frische Karotten",
+                "brand": "BioFarm",
+                "price": 1.2,
+                "discountPrice": null,
+                "priceToTray": null,
+                "tax": 0.07,
+                "package": "1kg",
+                "volume": "1000g",
+                "image": "assets/img/produce/carrots.jpg",
+                "stockQuantity": 80,
+                "minimumStockLevel": 15,
+                "reorderQuantity": 40,
+                "expirationDate": "2024-11-10",
+                "isAvailable": true,
+                "sizes": ["1kg"],
+                "flavors": ["Neutral"],
+                "allergens": ["Keine"],
+                "promotions": null,
+                "newArrival": false,
+                "bestseller": false,
+                "ecoFriendly": true,
+                "recyclingInfo": "Verpackung im Biomüll entsorgen"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
