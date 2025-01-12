@@ -1,34 +1,30 @@
-<div class="list-page">
-  <div class="headline-container">
-    <div class="h1">Lagerbestand</div>
-    <div class="buttons-container">
-      <button class="btn primary-btn" (click)="addProduct()">Produkte Hinzufügen</button>
-      <!-- <button class="btn secondary-btn" (click)="editProduct()">Produkte Ändern</button>
-      <button (click)="addCategory()">Kategorie hinzufügen</button>
-      <button (click)="addSubcategory()">Unterkategorie hinzufügen</button> -->
+<table mat-table [dataSource]="products" class="mat-elevation-z8">
+  <!-- ID-Spalte -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let product"> {{ product.id }} </td>
+  </ng-container>
 
-      
+  <!-- Name-Spalte -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
+  </ng-container>
 
-      
-    </div>
-  </div>
+  <!-- Beschreibung-Spalte -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let product"> {{ product.description }} </td>
+  </ng-container>
 
-  <h1>Produktliste</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Preis</th>
-        <th>Lagerbestand</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.name }}</td>
-        <td>{{ product.price }} €</td>
-        <td>{{ product.stockQuantity }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-</div>
+  <!-- Preis-Spalte -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price (€) </th>
+    <td mat-cell *matCellDef="let product"> {{ product.price }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'name', 'description', 'price']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'description', 'price']"></tr>
+</table>
+
+

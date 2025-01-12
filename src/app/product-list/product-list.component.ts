@@ -19,34 +19,48 @@ import { ProductService } from '../service/product.service';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  
-  products: any[] = [];
-  products$ = this.productService.getProducts('drinks', 'softdrinks');
-
   constructor(private productService: ProductService) {}
+  products: any[] = []; // Array, um die Produkte zu speichern
 
-  ngOnInit() {
-    this.productService.getProducts('drinks', 'softdrinks').subscribe({
-      next: (data) => {
-        this.products = data; // Produkte laden
-        console.log('Geladene Produkte:', this.products);
-      },
-      error: (err) => {
-        console.error('Fehler beim Laden der Produkte:', err);
-      },
-    });
+  product = {
+    id: 2001,
+    name: 'Evian',
+    description: 'Natürliches Mineralwasser',
+    brand: 'Evian',
+    price: 1.50,
+    quantity: 100,
+    stockQuantity: 100,
+    minimumStockLevel: 10,
+    category: 'Drinks',
+    subcategory: 'Whater',
+  };
+
+
+  ngOnInit(): void {
+    this.loadProducts();
   }
 
+  // Produkte laden
+  async loadProducts() {
+    try {
+      this.products = await this.productService.getProductsFromSubcategory('water');
+      console.log('Products loaded:', this.products);
+    } catch (error) {
+      console.error('Error loading products:', error);
+    }
+  }
 
   addProduct() {
-    const product = {
-      name: 'Coca-Cola',
-      price: 1.2,
-      stockQuantity: 50,
-      expirationDate: '2025-01-01',
-    };
-    this.productService.addProduct('drinks', 'softdrinks', 'coca-cola', product).then(() => {
-      console.log('Produkt hinzugefügt!');
-    });
+    this.productService
+      .addProductToSubcategory('water', this.product)
+      .then(() => {
+        console.log('Product added successfully to water!');
+      })
+      .catch((error) => {
+        console.error('Error adding product: ', error);
+      });
   }
+
+  
+  
 }

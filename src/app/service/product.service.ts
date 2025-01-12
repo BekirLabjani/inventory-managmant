@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, setDoc, collection, collectionData } from '@angular/fire/firestore';
-import { getDocs, query } from 'firebase/firestore';
+import { Firestore, collection, addDoc, query, where, getDocs, collectionData } from '@angular/fire/firestore'
 import { Observable } from 'rxjs';
 
 
@@ -11,34 +10,44 @@ export class ProductService {
  
   constructor(private firestore: Firestore) {}
 
-  // Kategorie hinzufügen
-  async addCategory(categoryId: string, categoryName: string) {
-    const categoryDoc = doc(this.firestore, `products/${categoryId}`);
-    await setDoc(categoryDoc, { category: categoryName });
-  }
-
-  // Unterkategorie hinzufügen
-  async addSubcategory(categoryId: string, subcategoryId: string, subcategoryName: string) {
-    const subcategoryDoc = doc(this.firestore, `products/${categoryId}/subcategory/${subcategoryId}`);
-    await setDoc(subcategoryDoc, { subcategory: subcategoryName });
-  }
-
-  // Produkt hinzufügen
-  async addProduct(categoryId: string, subcategoryId: string, productId: string, productData: any) {
-    const productDoc = doc(
+  
+  async checkIfProductExists(subcategory: string, productId: number): Promise<boolean> {
+    const productsCollection = collection(
       this.firestore,
-      `products/${categoryId}/subcategory/${subcategoryId}/product/${productId}`
+      `products/drinks/subcategory/${subcategory}/products`
     );
-    await setDoc(productDoc, productData);
+    const q = query(productsCollection, where('id', '==', productId));
+    const snapshot = await getDocs(q);
+    return !snapshot.empty; // Gibt `true` zurück, wenn das Produkt existiert
   }
 
-  // Produkte abrufen
-  getProducts(categoryId: string, subcategoryId: string): Observable<any[]> {
-    const productsRef = collection(
+  // Produkt zu einer Unterkategorie hinzufügen
+  addProductToSubcategory(subcategory: string, product: any) {
+    const productsCollection = collection(
       this.firestore,
-      `products/${categoryId}/subcategory/${subcategoryId}/product`
-    ); // Referenz zur Unterkollektion
-    return collectionData(productsRef, { idField: 'id' }); // Ruft die Daten direkt ab
+      `products/drinks/subcategory/${subcategory}/products`
+    );
+    return addDoc(productsCollection, product);
   }
-}
+
+  async getProductsFromSubcategory(subcategory: string): Promise<any[]> {
+    const productsCollection = collection(
+      this.firestore,
+      `products/drinks/subcategory/${subcategory}/products`
+    );
+    const snapshot = await getDocs(productsCollection);
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+
+
+  getFilteredProducts(subcategory: string, priceLimit: number): Observable<any[]> {
+    const productsCollection = collection(
+      this.firestore,
+      `products/drinks/subcategory/${subcategory}/products`
+    );
+    const q = query(productsCollection, where('price', '<=', priceLimit));
+    return collectionData(q, { idField: 'id' });
+  }
+  }
+  
   
