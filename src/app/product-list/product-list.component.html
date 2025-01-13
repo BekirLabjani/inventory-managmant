@@ -1,30 +1,42 @@
-<table mat-table [dataSource]="products" class="mat-elevation-z8">
-  <!-- ID-Spalte -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let product"> {{ product.id }} </td>
-  </ng-container>
+<div class="main-page">
+  <div class="header">
+    <div class="headlineText">
+      <h1>Der Lagerbestand</h1>
+    </div>
+    <div class="btn"> 
+      <button class="inventoryButton">Produkt Hinzufügen</button>
+      <button class="inventoryButton">Produkt Bearbeiten</button>
+    </div>
+  </div>
 
-  <!-- Name-Spalte -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
-  </ng-container>
+  <div class="table">
+    <table mat-table [dataSource]="products" class="mat-elevation-z8">
+      <!-- ID-Spalte -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let product"> {{ product.id }} </td>
+      </ng-container>
 
-  <!-- Beschreibung-Spalte -->
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let product"> {{ product.description }} </td>
-  </ng-container>
+      <!-- Name-Spalte -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
+      </ng-container>
 
-  <!-- Preis-Spalte -->
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Price (€) </th>
-    <td mat-cell *matCellDef="let product"> {{ product.price }} </td>
-  </ng-container>
+      <!-- Beschreibung-Spalte -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let product"> {{ product.description }} </td>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['id', 'name', 'description', 'price']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'description', 'price']"></tr>
-</table>
+      <!-- Preis-Spalte -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price (€) </th>
+        <td mat-cell *matCellDef="let product"> {{ product.price }} </td>
+      </ng-container>
 
-
+      <tr mat-header-row *matHeaderRowDef="['id', 'name', 'description', 'price']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'description', 'price']"></tr>
+    </table>
+  </div>
+</div>
