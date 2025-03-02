@@ -1,0 +1,51 @@
+<div class="login-container">
+  <div class="login-box">
+    <h2>Anmeldung</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Benutzername</label>
+        <div class="username-input-group">
+          <input 
+            type="text" 
+            id="username" 
+            formControlName="username" 
+            class="form-control"
+            [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+            placeholder="benutzername"
+          >
+          <span class="domain-suffix">&#64;admin.inventorymanagement.com</span>
+        </div>
+        <div class="invalid-feedback" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          <span *ngIf="loginForm.get('username')?.errors?.['required']">Benutzername ist erforderlich.</span>
+          <span *ngIf="loginForm.get('username')?.errors?.['pattern']">Benutzername darf nur Buchstaben, Zahlen, Punkte und Bindestriche enthalten.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Passwort</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          class="form-control"
+          [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+        <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">Passwort ist erforderlich.</span>
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Passwort muss mindestens 6 Zeichen lang sein.</span>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+          Anmelden
+        </button>
+        <a routerLink="/registration" class="btn btn-link">Neuen Account erstellen</a>
+      </div>
+    </form>
+  </div>
+</div>

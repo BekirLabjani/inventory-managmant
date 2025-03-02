@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, query, where, getDocs, collectionData } from '@angular/fire/firestore'
+import { Firestore, collection, addDoc, query, where, getDocs, collectionData, doc, setDoc } from '@angular/fire/firestore'
 import { Observable } from 'rxjs';
-
+import { PrdctList } from '../models/prdct-list';
 
 @Injectable({
   providedIn: 'root'
@@ -10,44 +10,29 @@ export class ProductService {
  
   constructor(private firestore: Firestore) {}
 
-  
-  async checkIfProductExists(subcategory: string, productId: number): Promise<boolean> {
-    const productsCollection = collection(
-      this.firestore,
-      `products/drinks/subcategory/${subcategory}/products`
-    );
-    const q = query(productsCollection, where('id', '==', productId));
-    const snapshot = await getDocs(q);
-    return !snapshot.empty; // Gibt `true` zurück, wenn das Produkt existiert
+  getCollectionData(collectionName: string): Observable<any[]> {
+    const collectionRef = collection(this.firestore, collectionName);
+    return collectionData(collectionRef, { idField: 'id' });
   }
 
-  // Produkt zu einer Unterkategorie hinzufügen
-  addProductToSubcategory(subcategory: string, product: any) {
-    const productsCollection = collection(
-      this.firestore,
-      `products/drinks/subcategory/${subcategory}/products`
-    );
-    return addDoc(productsCollection, product);
+  async addProduct(product: PrdctList) {
+    try {
+      // Erstelle eine Referenz zum Kategorie-Dokument
+      const categoryDocRef = doc(this.firestore, 'products', 'all');
+      
+      // Erstelle die Produkt-Collection innerhalb des Kategorie-Dokuments
+      const productsCollectionRef = collection(categoryDocRef, 'items');
+      
+      // Füge das Produkt zur Unterkollektion hinzu
+      const docRef = await addDoc(productsCollectionRef, {
+        ...product,
+        createdAt: new Date().getTime()
+      });
+      
+      return docRef.id;
+    } catch (error) {
+      console.error('Fehler beim Hinzufügen des Produkts:', error);
+      throw error;
+    }
   }
-
-  async getProductsFromSubcategory(subcategory: string): Promise<any[]> {
-    const productsCollection = collection(
-      this.firestore,
-      `products/drinks/subcategory/${subcategory}/products`
-    );
-    const snapshot = await getDocs(productsCollection);
-    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  }
-
-
-  getFilteredProducts(subcategory: string, priceLimit: number): Observable<any[]> {
-    const productsCollection = collection(
-      this.firestore,
-      `products/drinks/subcategory/${subcategory}/products`
-    );
-    const q = query(productsCollection, where('price', '<=', priceLimit));
-    return collectionData(q, { idField: 'id' });
-  }
-  }
-  
-  
+}

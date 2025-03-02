@@ -1,50 +1,173 @@
-<!-- <h1 mat-dialog-title>Produkt hinzufügen</h1>
-<div mat-dialog-content>
-  <form #productForm="ngForm">
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Produktname</mat-label>
-      <input matInput [(ngModel)]="newProduct.name" name="name" required />
-    </mat-form-field>
+<div class="container">
+  <h2>Neues Produkt hinzufügen</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- Linke Spalte -->
+      <div class="col-md-4">
+        <h4>Grundinformationen</h4>
+        <div class="mb-3">
+          <label for="name" class="form-label">Produktname*</label>
+          <input type="text" class="form-control" id="name" formControlName="name" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="description" class="form-label">Beschreibung</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="2"></textarea>
+        </div>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Kategorie</mat-label>
-      <input matInput [(ngModel)]="newProduct.category" name="category" />
-    </mat-form-field>
+        <div class="mb-3">
+          <label for="brand" class="form-label">Marke*</label>
+          <input type="text" class="form-control" id="brand" formControlName="brand" required>
+        </div>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Unterkategorie</mat-label>
-      <input matInput [(ngModel)]="newProduct.subcategory" name="subcategory" />
-    </mat-form-field>
+        <div class="mb-3">
+          <label for="category" class="form-label">Kategorie*</label>
+          <select class="form-control" id="category" formControlName="category" required>
+            <option value="">Bitte wählen</option>
+            <option value="Getränke">Getränke</option>
+            <option value="Lebensmittel">Lebensmittel</option>
+            <option value="Süßwaren">Süßwaren</option>
+          </select>
+        </div>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Preis</mat-label>
-      <input matInput type="number" [(ngModel)]="newProduct.price" name="price" />
-    </mat-form-field>
+        <div class="mb-3">
+          <label for="subcategory" class="form-label">Unterkategorie</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="subcategory" 
+            formControlName="subcategory"
+            placeholder="z.B. Limonade, Eistee, Säfte"
+          >
+        </div>
+      </div>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Lagerbestand</mat-label>
-      <input matInput type="number" [(ngModel)]="newProduct.stockQuantity" name="stockQuantity" />
-    </mat-form-field>
+      <!-- Mittlere Spalte -->
+      <div class="col-md-4">
+        <h4>Preis & Bestand</h4>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="price" class="form-label">Preis (€)*</label>
+              <input type="number" class="form-control" id="price" formControlName="price" step="0.01" required>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="discountPrice" class="form-label">Angebotspreis</label>
+              <input type="number" class="form-control" id="discountPrice" formControlName="discountPrice" step="0.01">
+            </div>
+          </div>
+        </div>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Beschreibung</mat-label>
-      <textarea matInput [(ngModel)]="newProduct.description" name="description"></textarea>
-    </mat-form-field>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="tax" class="form-label">MwSt. (%)</label>
+              <input type="number" class="form-control" id="tax" formControlName="tax" step="0.01">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="volume" class="form-label">Menge*</label>
+              <input type="text" class="form-control" id="volume" formControlName="volume" required>
+            </div>
+          </div>
+        </div>
 
-     Weitere Felder für alle Informationen -->
-    <!-- <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Marke</mat-label>
-      <input matInput [(ngModel)]="newProduct.brand" name="brand" />
-    </mat-form-field>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="stockQuantity" class="form-label">Lagerbestand*</label>
+              <input type="number" class="form-control" id="stockQuantity" formControlName="stockQuantity" required>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="minimumStockLevel" class="form-label">Mindestbestand</label>
+              <input type="number" class="form-control" id="minimumStockLevel" formControlName="minimumStockLevel">
+            </div>
+          </div>
+        </div>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Rabattpreis</mat-label>
-      <input matInput type="number" [(ngModel)]="newProduct.discountPrice" name="discountPrice" />
-    </mat-form-field>
+        <div class="mb-3">
+          <label for="expirationDate" class="form-label">MHD</label>
+          <input type="date" class="form-control" id="expirationDate" formControlName="expirationDate">
+        </div>
+      </div>
 
+      <!-- Rechte Spalte -->
+      <div class="col-md-4">
+        <h4>Zusatzinformationen</h4>
+        <div class="mb-3">
+          <label for="sizes" class="form-label">Verfügbare Größen</label>
+          <input type="text" class="form-control" id="sizes" formControlName="sizes" placeholder="z.B. 150g, 300g">
+        </div>
+
+        <div class="mb-3">
+          <label for="flavors" class="form-label">Geschmacksrichtungen</label>
+          <input type="text" class="form-control" id="flavors" formControlName="flavors" placeholder="z.B. Paprika, Salz">
+        </div>
+
+        <div class="mb-3">
+          <label for="allergens" class="form-label">Allergene</label>
+          <input type="text" class="form-control" id="allergens" formControlName="allergens" placeholder="z.B. Gluten, Milch">
+        </div>
+
+        <div class="mb-3">
+          <label for="promotions" class="form-label">Aktion</label>
+          <input type="text" class="form-control" id="promotions" formControlName="promotions">
+        </div>
+
+        <div class="status-checks">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="isAvailable" formControlName="isAvailable">
+            <label class="form-check-label" for="isAvailable">Verfügbar</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="newArrival" formControlName="newArrival">
+            <label class="form-check-label" for="newArrival">Neu</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="bestseller" formControlName="bestseller">
+            <label class="form-check-label" for="bestseller">Bestseller</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nährwerte in einer Zeile -->
+    <div class="row mt-4 nutritional-values" formGroupName="nutritionalValues">
+      <h4>Nährwerte (pro 100g/ml)</h4>
+      <div class="col-md-3 col-6">
+        <div class="mb-3">
+          <label for="calories" class="form-label">Kalorien</label>
+          <input type="number" class="form-control" id="calories" formControlName="calories">
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="mb-3">
+          <label for="protein" class="form-label">Protein</label>
+          <input type="number" class="form-control" id="protein" formControlName="protein" step="0.1">
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="mb-3">
+          <label for="carbohydrates" class="form-label">Kohlenhydrate</label>
+          <input type="number" class="form-control" id="carbohydrates" formControlName="carbohydrates" step="0.1">
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="mb-3">
+          <label for="fat" class="form-label">Fett</label>
+          <input type="number" class="form-control" id="fat" formControlName="fat" step="0.1">
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Produkt hinzufügen</button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Zurücksetzen</button>
+    </div>
   </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Abbrechen</button>
-  <button mat-raised-button color="primary" (click)="onAddProduct()">Speichern</button>
-</div>  -->

@@ -1,0 +1,218 @@
+.container {
+  max-width: 1400px;
+  padding: 2rem;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #007bff;
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.form-control {
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  &::placeholder {
+    color: #adb5bd;
+  }
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem !important;
+}
+
+.row {
+  margin-bottom: 2rem;
+  
+  .col-md-4 {
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    
+    @media (min-width: 768px) {
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.status-checks {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+
+  .form-check {
+    margin-bottom: 0.75rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .form-check-input {
+      margin-top: 0.25rem;
+      cursor: pointer;
+
+      &:checked {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+    }
+    
+    .form-check-label {
+      font-size: 0.95rem;
+      color: #495057;
+      cursor: pointer;
+    }
+  }
+}
+
+.nutritional-values {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 2rem 0;
+
+  h4 {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-control {
+    text-align: right;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  margin-top: 1rem;
+  border-top: 2px solid #e9ecef;
+
+  .btn {
+    min-width: 160px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+
+    &.btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+
+      &:hover:not(:disabled) {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        transform: translateY(-1px);
+      }
+
+      &:disabled {
+        background-color: #b6d4fe;
+        border-color: #b6d4fe;
+        cursor: not-allowed;
+      }
+    }
+
+    &.btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+
+      &:hover {
+        background-color: #5a6268;
+        border-color: #5a6268;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Responsive Anpassungen
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .row {
+    margin: 0;
+    
+    .col-md-4 {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// Zusätzliche Verbesserungen für Eingabefelder
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23343a40' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 12px;
+  padding-right: 2rem;
+}
+
+input[type="date"].form-control {
+  min-height: 38px;
+}
+
+input[type="number"].form-control {
+  text-align: right;
+}

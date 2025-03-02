@@ -1,0 +1,47 @@
+<div class="register-container">
+  <div class="register-box">
+    <h2>Registrierung</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Benutzername</label>
+        <input 
+          type="text" 
+          id="username" 
+          formControlName="username" 
+          class="form-control"
+          [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+        >
+        <div class="invalid-feedback" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+          <span *ngIf="registerForm.get('username')?.errors?.['required']">Benutzername ist erforderlich.</span>
+          <span *ngIf="registerForm.get('username')?.errors?.['minlength']">Benutzername muss mindestens 4 Zeichen lang sein.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Passwort</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          class="form-control"
+          [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        >
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Passwort ist erforderlich.</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Passwort muss mindestens 6 Zeichen lang sein.</span>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+          Registrieren
+        </button>
+        <a routerLink="/login" class="btn btn-link">Zurück zum Login</a>
+      </div>
+    </form>
+  </div>
+</div> 

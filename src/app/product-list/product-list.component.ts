@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, query, where, getDocs, collectionGroup, doc } from '@angular/fire/firestore';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -7,60 +7,42 @@ import { PrdctList } from '../models/prdct-list';
 import { Route, Router } from '@angular/router';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { ProductService } from '../service/product.service';
-
-
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [MatTableModule, CommonModule],
+  imports: [MatTableModule, CommonModule, RouterModule],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  constructor(private productService: ProductService) {}
-  products: any[] = []; // Array, um die Produkte zu speichern
+  products: any[] = [];
 
-  product = {
-    id: 2001,
-    name: 'Evian',
-    description: 'Natürliches Mineralwasser',
-    brand: 'Evian',
-    price: 1.50,
-    quantity: 100,
-    stockQuantity: 100,
-    minimumStockLevel: 10,
-    category: 'Drinks',
-    subcategory: 'Whater',
-  };
-
+  constructor(private productService: ProductService, private firestore: Firestore) {}
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
-  // Produkte laden
   async loadProducts() {
     try {
-      this.products = await this.productService.getProductsFromSubcategory('water');
-      console.log('Products loaded:', this.products);
+      // Hole die Referenz zum all-Dokument
+      const categoryDocRef = doc(this.firestore, 'products', 'all');
+      
+      // Hole die Produkte aus der items-Unterkollektion
+      const productsCollectionRef = collection(categoryDocRef, 'items');
+      const querySnapshot = await getDocs(productsCollectionRef);
+      
+      this.products = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        path: `products/all/items/${doc.id}`,
+        ...doc.data()
+      }));
+
+      console.log('Produkte geladen:', this.products);
     } catch (error) {
-      console.error('Error loading products:', error);
+      console.error('Fehler beim Laden der Produkte:', error);
     }
   }
-
-  addProduct() {
-    this.productService
-      .addProductToSubcategory('water', this.product)
-      .then(() => {
-        console.log('Product added successfully to water!');
-      })
-      .catch((error) => {
-        console.error('Error adding product: ', error);
-      });
-  }
-
-  
-  
 }
